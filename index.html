@@ -20,6 +20,19 @@
             align-items: center;
         }
 
+        /* Làm mờ nhẹ nền để tăng độ tương phản */
+        body::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.2); /* Làm mờ nhẹ */
+            backdrop-filter: blur(3px); /* Làm mờ nền */
+            z-index: -1;
+        }
+
         /* Tiêu đề */
         h2 {
             color: white;
@@ -32,13 +45,13 @@
 
         /* Kích thước khung chatbot */
         iframe {
-            border: none;
+            border: 2px solid #004080; /* Viền xanh đậm */
             width: 80%; /* Chiếm 80% chiều rộng */
             height: 80vh; /* Chiếm 80% chiều cao màn hình */
             max-width: 600px; /* Giới hạn chiều rộng tối đa */
-            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
-            border-radius: 10px;
-            background: white;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3); /* Đổ bóng */
+            border-radius: 15px;
+            background: #f5f5f5; /* Nền sáng hơn */
         }
     </style>
 </head>
