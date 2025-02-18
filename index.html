@@ -20,40 +20,27 @@
             align-items: center;
         }
 
-        /* Làm mờ nhẹ nền để tăng độ tương phản */
-        body::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(255, 255, 255, 0.2); /* Làm mờ nhẹ */
-            backdrop-filter: blur(3px);
-            z-index: -1;
-        }
-
         /* Tiêu đề */
         h2 {
             color: white;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
-            font-size: 28px; /* Kích thước chữ lớn hơn */
-            background: rgba(0, 0, 0, 0.7);
-            padding: 15px;
-            border-radius: 8px;
-            width: 80%; /* Rộng bằng chatbox */
-            max-width: 600px; /* Giới hạn chiều rộng */
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.8);
+            font-size: 32px; /* Chữ lớn hơn */
+            background: rgba(0, 0, 0, 0.8);
+            padding: 15px 20px;
+            border-radius: 10px;
+            width: 90%; /* Rộng gần bằng chatbox */
+            max-width: 700px; /* Giới hạn chiều rộng */
             text-align: center;
             font-weight: bold;
         }
 
         /* Kích thước khung chatbot */
         iframe {
-            border: 2px solid #FF9800; /* Viền màu cam */
+            border: 3px solid #FF9800; /* Viền màu cam */
             width: 80%; /* Chiếm 80% chiều rộng */
             height: 80vh; /* Chiếm 80% chiều cao màn hình */
             max-width: 600px; /* Giới hạn chiều rộng tối đa */
-            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.4);
             border-radius: 15px;
             background: white;
         }
@@ -63,11 +50,12 @@
             background-color: #FF9800; /* Màu cam */
             color: white; /* Chữ trắng */
             font-weight: bold; /* Chữ đậm */
-            padding: 10px;
+            padding: 12px 16px;
             border-radius: 8px;
-            box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.2);
-            margin: 10px 0;
+            box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
+            margin: 15px 0;
             display: inline-block;
+            font-size: 18px;
         }
     </style>
 </head>
