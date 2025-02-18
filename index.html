@@ -23,47 +23,27 @@
         /* Tiêu đề */
         h2 {
             color: white;
-            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.8);
-            font-size: 32px; /* Chữ lớn hơn */
-            background: rgba(0, 0, 0, 0.8);
-            padding: 15px 20px;
-            border-radius: 10px;
-            width: 90%; /* Rộng gần bằng chatbox */
-            max-width: 700px; /* Giới hạn chiều rộng */
-            text-align: center;
-            font-weight: bold;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+            font-size: 24px;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 10px 20px;
+            border-radius: 8px;
         }
 
         /* Kích thước khung chatbot */
         iframe {
-            border: 3px solid #FF9800; /* Viền màu cam */
+            border: none;
             width: 80%; /* Chiếm 80% chiều rộng */
             height: 80vh; /* Chiếm 80% chiều cao màn hình */
             max-width: 600px; /* Giới hạn chiều rộng tối đa */
-            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.4);
-            border-radius: 15px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
             background: white;
-        }
-
-        /* Tùy chỉnh nền câu trả lời */
-        .chat-response {
-            background-color: #FF9800; /* Màu cam */
-            color: white; /* Chữ trắng */
-            font-weight: bold; /* Chữ đậm */
-            padding: 12px 16px;
-            border-radius: 8px;
-            box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
-            margin: 15px 0;
-            display: inline-block;
-            font-size: 18px;
         }
     </style>
 </head>
 <body>
     <h2>Hỏi đáp Dự án tốt nghiệp</h2>
     <iframe allow="microphone;" src="https://console.dialogflow.com/api-client/demo/embedded/83f39534-368e-483e-b557-ea8d4e231342"></iframe>
-
-    <!-- Ví dụ hiển thị câu trả lời -->
-    <div class="chat-response">Đây là câu trả lời của chatbot</div>
 </body>
 </html>
