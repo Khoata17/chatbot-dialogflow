@@ -3,49 +3,51 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hỏi đáp Dự án tốt nghiệp</title>
+    <title>Chatbot Dialogflow</title>
     <style>
-        /* Thiết lập hình nền */
-        body {
-            text-align: center;
-            font-family: Arial, sans-serif;
-            background-image: url('background.png'); /* Hình nền */
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-        }
-
-        /* Tiêu đề */
-        h2 {
-            color: white;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
-            font-size: 24px;
-            background: rgba(0, 0, 0, 0.5);
-            padding: 10px 20px;
-            border-radius: 8px;
-        }
-
-        /* Kích thước khung chatbot */
-        iframe {
-            border: none;
-            width: 80%; /* Chiếm 80% chiều rộng */
-            height: 80vh; /* Chiếm 80% chiều cao màn hình */
-            max-width: 600px; /* Giới hạn chiều rộng tối đa */
-            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
-            border-radius: 10px;
-            background: white;
-        }
+        body { font-family: Arial, sans-serif; text-align: center; }
+        #chatbox { width: 400px; height: 500px; border: 1px solid #ccc; padding: 10px; margin: auto; overflow-y: scroll; }
+        input { width: 80%; padding: 10px; margin-top: 10px; }
+        button { padding: 10px; }
     </style>
 </head>
 <body>
-    <h2>Hỏi đáp Dự án tốt nghiệp</h2>
-    <iframe allow="microphone;" width="350" height="500"
-    src="https://bot.dialogflow.com/83f39534-368e-483e-b557-ea8d4e231342">
-</iframe>
+    <h2>Chatbot với Dialogflow</h2>
+    <div id="chatbox"></div>
+    <input type="text" id="userInput" placeholder="Nhập tin nhắn..." onkeypress="if(event.keyCode == 13) sendMessage()">
+    <button onclick="sendMessage()">Gửi</button>
+
+    <script>
+        async function sendMessage() {
+            let userMessage = document.getElementById("userInput").value;
+            document.getElementById("chatbox").innerHTML += `<p><b>Bạn:</b> ${userMessage}</p>`;
+
+            const projectId = "chatbotth-ct-p-igpn"; // Thay bằng project ID của bạn
+            const sessionId = "123456"; 
+            const apiUrl = `https://dialogflow.googleapis.com/v2/projects/${projectId}/agent/sessions/${sessionId}:detectIntent`;
+
+            const response = await fetch(apiUrl, {
+                method: "POST",
+                headers: {
+                    "Authorization": "https://oauth2.googleapis.com/token",  // Thay bằng access token của bạn
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    "query_input": {
+                        "text": {
+                            "text": userMessage,
+                            "language_code": "vi"
+                        }
+                    }
+                })
+            });
+
+            let jsonResponse = await response.json();
+            let botMessage = jsonResponse.queryResult.fulfillmentText;
+
+            document.getElementById("chatbox").innerHTML += `<p><b>Bot:</b> ${botMessage}</p>`;
+            document.getElementById("userInput").value = "";
+        }
+    </script>
 </body>
 </html>
