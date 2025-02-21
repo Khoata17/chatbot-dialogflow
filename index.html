@@ -22,30 +22,40 @@
             let userMessage = document.getElementById("userInput").value;
             document.getElementById("chatbox").innerHTML += `<p><b>Bạn:</b> ${userMessage}</p>`;
 
-            const projectId = "chatbotth-ct-p-igpn"; // Thay bằng project ID của bạn
+            const projectId = "chatbotth-ct-p-igpn"; // Thay bằng Project ID của bạn
             const sessionId = "123456"; 
             const apiUrl = `https://dialogflow.googleapis.com/v2/projects/${projectId}/agent/sessions/${sessionId}:detectIntent`;
 
-            const response = await fetch(apiUrl, {
-                method: "POST",
-                headers: {
-                    "Authorization": "https://oauth2.googleapis.com/token",  // Thay bằng access token của bạn
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({
-                    "query_input": {
-                        "text": {
-                            "text": userMessage,
-                            "language_code": "vi"
+            try {
+                const response = await fetch(apiUrl, {
+                    method: "POST",
+                    headers: {
+                        "Authorization": "Bearer ya29.c.c0ASRK0GbLdymiNgo2Eay0gYzacHCCf1WSQ3yBQ_WBvIto2rWI8f_n7Y1hCqqkGlf-HVhCi27omh2OVslOyWGH9oc7SmUqKLAu8EIcaG5NV5t3RS6HiYnk0Lm_MGa-wRmwUH7dwBxJq2cvKFyl9qGMWp8suwt-LoTGkXfptyLloUAW6Pz59ddOzXX9jguvRpiX1zQ7pdkjmJZUcsJsPvxar1A0vBiYXYjur8ZDPyC8xa-dT2ukZO_qdbobCwWRqs13qeCxhX_Dpya3ivEWCMV3nfnsun1LpFJQRPbedO4PtX-ocX9l5AGgw-kJBOwldCP_gcvktEHU-sPcMk45us5914iUSo4MqnQ_tgn6KPIEC1ITOrGbsrGiQgN384CYpYOFpl7ibIRhM8UymtZZRevf4agSl3a8OyvzZbbmz05U2F6gkIs3lMFnRW5p6aWc2W02qwS-9idBrJZ4sUeSZWYnwagpdfh3BgZJ__zxb7t5l5_swkURSMfZ75e3ZcUO5e8aFapxzrJynJm7q4tWZf6o0yglwvYJXBJb6e1p12Wn38uz5hryc47Un2Uq3zgn7Ik6pBjJSM1OujB1vc_V3BOeBj6yslRZnoxv7pVa05mklv0s0tMkf02VbjogBa6fMMpdU0fx4cea8MVj-q4r_-oQjIWUB-RXvvMsS_0UXtjX_5nvi6nb_34UwumUx6ec3J2YanU-ZrkuW0oFIuBoZxSdRkcZZgVhYmBeybmZFgBZSfMFUg8qWXShv5xevjnSJkcU7Ib_guzloQhenfk8ezJ8yYdvYdU3kliSQp1_mvxBl6m9fOIjqUzpZ2O8zWde950xIpzZulf604avQkOpWvBYwYjRnryyOd_VRFOmqXvrJOSWwF6XFQiefhBiqO9_tm-2j4ZJiIUup9oabeoqRerlF00Qo4B5bhsqWnWIe7yBWQwMjBFsVYuY8In04X4elXp5urbfJBIU57ekMbMV4W3hUXWM84wv79mdwh51p16itgkswo7rg4iOdo",  
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        "query_input": {
+                            "text": {
+                                "text": userMessage,
+                                "language_code": "vi"
+                            }
                         }
-                    }
-                })
-            });
+                    })
+                });
 
-            let jsonResponse = await response.json();
-            let botMessage = jsonResponse.queryResult.fulfillmentText;
+                let jsonResponse = await response.json();
+                
+                if (jsonResponse.queryResult && jsonResponse.queryResult.fulfillmentText) {
+                    let botMessage = jsonResponse.queryResult.fulfillmentText;
+                    document.getElementById("chatbox").innerHTML += `<p><b>Bot:</b> ${botMessage}</p>`;
+                } else {
+                    document.getElementById("chatbox").innerHTML += `<p><b>Bot:</b> Không có phản hồi!</p>`;
+                }
+            } catch (error) {
+                console.error("Lỗi:", error);
+                document.getElementById("chatbox").innerHTML += `<p><b>Bot:</b> Lỗi kết nối hoặc token hết hạn!</p>`;
+            }
 
-            document.getElementById("chatbox").innerHTML += `<p><b>Bot:</b> ${botMessage}</p>`;
             document.getElementById("userInput").value = "";
         }
     </script>
